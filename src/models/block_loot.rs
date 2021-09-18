@@ -18,7 +18,7 @@ pub struct DropItem {
     #[serde(rename = "dropChance")]
     drop_chance: f64,
     #[serde(rename = "stackSizeRange")]
-    stack_size_range: [Option<u64>; 2],
+    stack_size_range: [Option<i64>; 2],
     #[serde(rename = "blockAge")]
     block_age: Option<u64>,
     #[serde(rename = "silkTouch")]
