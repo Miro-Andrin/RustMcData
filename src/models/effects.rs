@@ -16,8 +16,7 @@ pub struct Effect {
     /// The name of an effect.
     name: String,
     /// Whether an effect is positive or negative.
-    #[serde(rename = "type")]
-    effect_type: EffectType,
+    r#type: EffectType,
 
 }
 
