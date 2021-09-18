@@ -43,8 +43,15 @@ pub struct ArgumentNode {
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ParseInfo {
     parser: String,
-    modifier: Option<HashMap<String, serde_json::Value>>,
+    modifier: Option<Modifier>,
     examples: Option<Vec<String>>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Modifier {
+    amount: Option<String>,
+    r#type: Option<String>,
+    min: Option<f32>,
 }
 
 
