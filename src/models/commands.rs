@@ -4,11 +4,14 @@ use std::collections::HashMap;
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Commands {
     root: RootNode,
-    parsers: Vec<ParseInfor>
+    parsers: Vec<ParseInfo>
 }
 #[derive(Debug, Deserialize, Serialize)]
+#[serde(tag = "type")]
 pub enum Node {
+    #[serde(rename = "literal")]
     Literal(LiteralNode),
+    #[serde(rename = "argument")]
     Argument(ArgumentNode),
 }
 
@@ -22,7 +25,6 @@ pub struct RootNode {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct LiteralNode {
-    r#type: String,
     name: String,
     executable: bool,
     redirects: Vec<String>,
@@ -31,19 +33,18 @@ pub struct LiteralNode {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ArgumentNode {
-    r#type: String,
     name: String,
     executable: bool,
     redirects: Vec<String>,
     children: Vec<Node>,
-    parser: Option<HashMap<String, String>>
+    parser: Option<ParseInfo>
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct ParseInfor {
+pub struct ParseInfo {
     parser: String,
     modifier: Option<HashMap<String, serde_json::Value>>,
-    examples: Vec<String>
+    examples: Option<Vec<String>>,
 }
 
 
@@ -54,7 +55,7 @@ mod test {
     const MC_DATA_DIR: &str = "./minecraft-data/data/pc/";
 
     #[test]
-    fn test_block_loot() {
+    fn test_commands() {
         for version_folder in std::fs::read_dir(MC_DATA_DIR).unwrap() {
             let dir = version_folder.unwrap();
             let mut path = dir.path();
