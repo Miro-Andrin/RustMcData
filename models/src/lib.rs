@@ -1,0 +1,46 @@
+mod biomes;
+mod block_collision_shapes;
+mod block_loot;
+mod blocks;
+mod commands;
+mod effects;
+mod enchantments;
+mod entities;
+mod entity_loot;
+mod foods;
+mod instruments;
+mod items;
+mod language;
+mod map_icons;
+mod materials;
+mod particles;
+mod protocol_versions;
+mod recipes;
+mod tints;
+mod version;
+mod windows;
+
+pub use biomes::*;
+pub use block_collision_shapes::*;
+pub use block_loot::*;
+pub use blocks::*;
+pub use commands::*;
+pub use effects::*;
+pub use enchantments::*;
+pub use entities::*;
+pub use entity_loot::*;
+pub use foods::*;
+pub use instruments::*;
+pub use items::*;
+pub use language::*;
+pub use map_icons::*;
+pub use materials::*;
+pub use particles::*;
+pub use protocol_versions::*;
+pub use recipes::*;
+pub use tints::*;
+pub use version::*;
+pub use windows::*;
+
+#[cfg(test)]
+const MC_DATA_DIR: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/minecraft-data/data/pc/");
