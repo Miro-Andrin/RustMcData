@@ -18,9 +18,7 @@ pub struct Recipies {
 pub struct NewRecipe {
     name: Option<String>,
     r#type: NewRecipeType,
-    ingredients: Vec<serde_json::Value>,
-    input: Option<Vec<serde_json::Value>>,
-    output: Vec<serde_json::Value>,
+    ingredients: Vec<u64>,
     priority: Option<f64> // Only used in bedrock
 }
 

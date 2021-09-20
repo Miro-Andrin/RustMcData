@@ -22,9 +22,9 @@ pub struct Block {
     material: Option<String>,
     #[serde(rename = "harvestTools")]
     harvest_tools : Option<HashMap<usize, bool>>,
-    variations: Option<Vec<serde_json::Value>>,
-    states: Option<Vec<serde_json::Value>>,
-    drops: Vec<serde_json::Value>,
+    variations: Option<Vec<Variation>>,
+    states: Option<Vec<State>>,
+    drops: Drops,
     transparent: bool,
     #[serde(rename = "emitLight")]
     emit_light: u8, // 0 to 15
@@ -45,6 +45,44 @@ pub enum BoundingBox {
     Block,
     #[serde(rename = "empty")]
     Empty
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum Drops {
+    New(Vec<u64>),
+    /// Used in older versions of minecraft.
+    Old(Vec<Drop>)
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Drop {
+    drop: DropInfo
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum DropInfo {
+    Single(u64),
+    Object {
+        id: u64,
+        metadata: u64,
+    }
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct State {
+    name: String,
+    r#type: String,
+    num_values: u64,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Variation {
+    #[serde(rename = "displayName")]
+    display_name: String,
+    metadata: u64,
+    description: Option<String>
 }
 
 #[cfg(test)]
