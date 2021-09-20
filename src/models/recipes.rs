@@ -25,19 +25,20 @@ pub struct NewRecipe {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum NewRecipeType {
-    multi,
-    cartography_table,
-    shapeless,
-    stonecutter,
-    crafting_table,
-    shaped,
-    shulker_box,
-    furnace,
-    blast_furnace,
-    smoker,
-    soul_campfire,
-    campfire
+    Multi,
+    CartographyTable,
+    Shapeless,
+    Stonecutter,
+    CraftingTable,
+    Shaped,
+    ShulkerBox,
+    Furnace,
+    BlastFurnace,
+    Smoker,
+    SoulCampfire,
+    Campfire
 }
 
 type Recipe = OneOf<ShapedRecipe, ShapelessRecipe>;
@@ -81,7 +82,9 @@ pub struct Shape {
 
 
 mod test {
+    #[cfg(test)]
     use super::*;
+    #[cfg(test)]
     const MC_DATA_DIR: &str = "./minecraft-data/data/pc/";
 
     #[test]
