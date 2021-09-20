@@ -41,3 +41,6 @@ pub use recipes::*;
 pub use tints::*;
 pub use version::*;
 pub use windows::*;
+
+#[cfg(test)]
+const MC_DATA_DIR: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/minecraft-data/data/pc/");

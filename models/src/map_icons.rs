@@ -2,37 +2,38 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(transparent)]
-pub struct Instruments {
-    instruments: Vec<Instrument>,
+pub struct MapIcons {
+    icons: Vec<MapIcon>
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Instrument {
-    /// The unique identifier for an instrument.
-    id: u64,
-    /// The name of an instrument.
+pub struct MapIcon {
+    id : u64,
     name: String,
-    /// The sound ID played by this instrument.
-    sound: Option<String>,
+    /// Description of the map icon's appearance
+    appearance: String,
+    #[serde(rename = "visibleInItemFrame")]
+    visible_in_item_frame: bool,
 }
 
+
+#[cfg(test)]
 mod test {
-    #[cfg(test)]
+    
     use super::*;
-    #[cfg(test)]
-    const MC_DATA_DIR: &str = "./minecraft-data/data/pc/";
+    use crate::MC_DATA_DIR;
 
     #[test]
-    fn test_instruments() {
+    fn test_block_loot() {
         for version_folder in std::fs::read_dir(MC_DATA_DIR).unwrap() {
             let dir = version_folder.unwrap();
             let mut path = dir.path();
-            path.push("instruments.json");
+            path.push("mapIcons.json");
 
             if path.exists() {
                 println!("{}",path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
-                let _instruments: Instruments = serde_json::from_str(&contents).unwrap();
+                let _shapes: MapIcons = serde_json::from_str(&contents).unwrap();
             }
         }
     }
