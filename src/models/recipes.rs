@@ -8,7 +8,7 @@ pub enum OneOf<A, B> {
     B(B)
 }
 
-#[derive(Debug,Serialize,Deserialize)]
+#[derive(Debug,Deserialize,Serialize)]
 #[serde(transparent)]
 pub struct Recipies {
     value : HashMap<String, OneOf<Vec<Recipe>, NewRecipe>>
@@ -102,117 +102,4 @@ mod test {
         }
     }
 }
-
-
-
-// #[derive(Debug, Deserialize, Serialize)]
-// #[serde(transparent)]
-// pub struct Recipies {
-//     values: HashMap<String, Vec<Recipie>>
-// }
-
-// #[derive(Debug, Deserialize, Serialize)]
-// #[serde(untagged)]
-// pub enum Recipie {
-//     Shaped(ShapedRecipe),
-//     Shapeless(ShapelessRecipe)
-// }
-// #[derive(Debug, Deserialize, Serialize)]
-// pub struct ShapedRecipe {
-//     result: serde_json::Value,
-//     inShape: serde_json::Value,
-//     outShape: Option<serde_json::Value>
-// }
-
-// #[derive(Debug, Deserialize, Serialize)]
-// pub struct ShapelessRecipe {
-//     result : serde_json::Value ,
-//     ingredients : serde_json::Value , 
-// }
-
-// ---------------------------------------
-
-// #[derive(Debug, Deserialize, Serialize)]
-// pub enum SchemaVersion {
-//     Old(Vec<Recipe>),
-//     //New(NewRecipeScheme)
-// }
-
-// // Definitions
-// type Metadata = u64;
-// type ID = Option<u64>;
-// type Count = u64;
-// type IdMetadataArray = Vec<Option<u64>>;
-
-// #[derive(Debug, Deserialize, Serialize)]
-// struct IdMetadataCountObject {
-//     Id: ID,
-//     metadata: Option<Metadata>, 
-//     count: Option<Count>, 
-// }
-
-// #[derive(Debug, Deserialize, Serialize)]
-// enum RecipeItem {
-//     Id(ID),
-//     Array(IdMetadataArray),
-//     Obj(IdMetadataCountObject)
-// }
-
-// // #[derive(Debug, Deserialize, Serialize)]
-// // pub enum RecipeContainer {
-// //     Array(Vec<Recipe>)
-// // }
-
-
-// type ShapeRow = Vec<RecipeItem>;
-// type Shape = Vec<ShapeRow>;
-// type Ingredients = Vec<RecipeItem>; // At least one
-
-
-// #[derive(Debug, Deserialize, Serialize)]
-// pub struct ShapedRecipe {
-//     result: RecipeItem,
-//     inShape: Option<Shape>,
-//     outShape: Shape,
-// }
-
-// #[derive(Debug, Deserialize, Serialize)]
-// pub struct ShapelessRecipe {
-//     result: RecipeItem,
-//     ingredients: Ingredients,
-// }
-
-// #[derive(Debug, Deserialize, Serialize)]
-// pub enum Recipe {
-//     Shaped(ShapedRecipe),
-//     Shapeless(ShapelessRecipe)
-// }
-
-
-
-// // New recipe schema 
-// #[derive(Debug, Deserialize, Serialize)]
-// pub struct NewRecipeScheme {
-//     name: Option<String>, // unique id
-//     r#type: NewRecipeSchemeType,
-//     ingredients: Vec<serde_json::Value>, //Todo: figure out what this is?
-//     input: Option<Vec<serde_json::Value>>, //Todo: figure out what this is?
-//     output: Vec<serde_json::Value>, //Todo: figure out what this is?}
-//     priority: Vec<f64>, // bedrock only
-// }
-// #[derive(Debug, Deserialize, Serialize)]
-// pub enum NewRecipeSchemeType {
-//     multi,
-//     cartography_table,
-//     shapeless,
-//     stonecutter,
-//     crafting_table,
-//     shaped,
-//     shulker_box,
-//     furnace,
-//     blast_furnace,
-//     smoker,
-//     soul_campfire,
-//     campfire
-// }
 
