@@ -10,7 +10,9 @@ pub struct Version {
 }
 
 mod test {
+    #[cfg(test)]
     use super::*;
+    #[cfg(test)]
     const MC_DATA_DIR: &str = "./minecraft-data/data/pc/";
 
     #[test]
