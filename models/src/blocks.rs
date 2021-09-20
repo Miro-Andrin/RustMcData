@@ -50,7 +50,7 @@ pub enum BoundingBox {
 #[cfg(test)]
 mod test {
     use super::*;
-    const MC_DATA_DIR: &str = "./minecraft-data/data/pc/";
+    use crate::MC_DATA_DIR;
 
     #[test]
     fn test_block() {

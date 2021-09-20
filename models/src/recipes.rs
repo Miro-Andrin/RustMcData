@@ -85,7 +85,7 @@ mod test {
     #[cfg(test)]
     use super::*;
     #[cfg(test)]
-    const MC_DATA_DIR: &str = "./minecraft-data/data/pc/";
+    use crate::MC_DATA_DIR;
 
     #[test]
     fn test_language() {
