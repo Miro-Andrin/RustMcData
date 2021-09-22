@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Commands {
     root: RootNode,
-    parsers: Vec<ParseInfo>
+    parsers: Vec<ParseInfo>,
 }
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(tag = "type")]
@@ -27,7 +27,7 @@ pub struct LiteralNode {
     name: String,
     executable: bool,
     redirects: Vec<String>,
-    children: Vec<Node>
+    children: Vec<Node>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -36,7 +36,7 @@ pub struct ArgumentNode {
     executable: bool,
     redirects: Vec<String>,
     children: Vec<Node>,
-    parser: Option<ParseInfo>
+    parser: Option<ParseInfo>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -53,8 +53,6 @@ pub struct Modifier {
     min: Option<f32>,
 }
 
-
-
 #[cfg(test)]
 mod test {
     use super::*;
@@ -68,7 +66,7 @@ mod test {
             path.push("commands.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _shapes: Commands = serde_json::from_str(&contents).unwrap();
             }

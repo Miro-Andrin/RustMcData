@@ -25,7 +25,7 @@ pub struct ItemDrop {
 
 #[cfg(test)]
 mod test {
-    
+
     use super::*;
     use crate::MC_DATA_DIR;
 
@@ -37,7 +37,7 @@ mod test {
             path.push("entityLoot.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _shapes: EntityLoots = serde_json::from_str(&contents).unwrap();
             }

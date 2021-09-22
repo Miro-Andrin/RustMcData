@@ -17,14 +17,13 @@ pub struct Effect {
     name: String,
     /// Whether an effect is positive or negative.
     r#type: EffectType,
-
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum EffectType {
     Good,
-    Bad
+    Bad,
 }
 
 mod test {
@@ -41,7 +40,7 @@ mod test {
             path.push("effects.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _effects: Effects = serde_json::from_str(&contents).unwrap();
             }

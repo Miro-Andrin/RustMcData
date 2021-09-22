@@ -6,7 +6,7 @@ pub struct Version {
     minecraft_version: String,
     version: u64,
     #[serde(rename = "majorVersion")]
-    major_version: String
+    major_version: String,
 }
 
 mod test {
@@ -23,7 +23,7 @@ mod test {
             path.push("version.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _version: Version = serde_json::from_str(&contents).unwrap();
             }

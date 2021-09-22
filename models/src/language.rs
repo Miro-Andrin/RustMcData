@@ -22,11 +22,10 @@ mod test {
             path.push("language.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _language: Language = serde_json::from_str(&contents).unwrap();
             }
         }
     }
 }
-

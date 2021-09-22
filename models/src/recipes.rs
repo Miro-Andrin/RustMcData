@@ -1,17 +1,17 @@
-use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum OneOf<A, B> {
     A(A),
-    B(B)
+    B(B),
 }
 
-#[derive(Debug,Deserialize,Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct Recipies {
-    value : HashMap<String, OneOf<Vec<Recipe>, NewRecipe>>
+    value: HashMap<String, OneOf<Vec<Recipe>, NewRecipe>>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -19,7 +19,7 @@ pub struct NewRecipe {
     name: Option<String>,
     r#type: NewRecipeType,
     ingredients: Vec<u64>,
-    priority: Option<f64> // Only used in bedrock
+    priority: Option<f64>, // Only used in bedrock
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -36,25 +36,24 @@ pub enum NewRecipeType {
     BlastFurnace,
     Smoker,
     SoulCampfire,
-    Campfire
+    Campfire,
 }
 
 type Recipe = OneOf<ShapedRecipe, ShapelessRecipe>;
-#[derive(Debug,Serialize,Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct ShapedRecipe {
-    result: RecipeItem ,  // todo
+    result: RecipeItem, // todo
     #[serde(rename = "inShape")]
     in_shape: Shape, //todo
     #[serde(rename = "outShape")]
     out_shape: Option<Shape>, // todo
 }
 
-#[derive(Debug,Serialize,Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct ShapelessRecipe {
-    result: RecipeItem ,  
+    result: RecipeItem,
     ingredients: Vec<RecipeItem>, //todo
 }
-
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -68,16 +67,12 @@ pub enum RecipeItem {
     },
 }
 
-
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(transparent)]
-pub struct Shape { 
+pub struct Shape {
     // This is the only case were RecipeItem::Id or metadata can be null.
-    rows: Vec<Vec<RecipeItem>>
+    rows: Vec<Vec<RecipeItem>>,
 }
-
-
-
 
 mod test {
     #[cfg(test)]
@@ -93,11 +88,10 @@ mod test {
             path.push("recipes.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _particle: Recipies = serde_json::from_str(&contents).unwrap();
             }
         }
     }
 }
-

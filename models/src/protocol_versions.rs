@@ -1,11 +1,9 @@
-
-
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct ProtocolVersions {
-    entries: Vec<ProtocolVersion>
+    entries: Vec<ProtocolVersion>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]

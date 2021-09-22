@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct Windows {
-    windows: Vec<Window>
+    windows: Vec<Window>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -16,7 +16,7 @@ pub struct Window {
     slots: Option<Vec<WindowSlot>>,
     /// Names of the properties of the window.
     properties: Option<Vec<String>>,
-    opened_with: Option<OpenedWith>
+    opened_with: Option<OpenedWith>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -26,7 +26,7 @@ pub struct WindowSlot {
     /// The position of the slot or beginning of the slot range.
     index: u64,
     /// The size of the slot range.
-    size: Option<u64>
+    size: Option<u64>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -49,11 +49,10 @@ mod test {
             path.push("windows.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _windows: Windows = serde_json::from_str(&contents).unwrap();
             }
         }
     }
 }
-

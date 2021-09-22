@@ -3,12 +3,12 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct MapIcons {
-    icons: Vec<MapIcon>
+    icons: Vec<MapIcon>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct MapIcon {
-    id : u64,
+    id: u64,
     name: String,
     /// Description of the map icon's appearance
     appearance: String,
@@ -16,10 +16,9 @@ pub struct MapIcon {
     visible_in_item_frame: bool,
 }
 
-
 #[cfg(test)]
 mod test {
-    
+
     use super::*;
     use crate::MC_DATA_DIR;
 
@@ -31,7 +30,7 @@ mod test {
             path.push("mapIcons.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _shapes: MapIcons = serde_json::from_str(&contents).unwrap();
             }

@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct Foods {
-    foods: Vec<Food>
+    foods: Vec<Food>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -16,12 +16,12 @@ pub struct Food {
     name: String,
     #[serde(rename = "foodPoints")]
     food_points: f64, // zero or more
-    saturation: f64,  // zero or more
+    saturation: f64, // zero or more
     #[serde(rename = "effectiveQuality")]
     effective_quality: f64,
     #[serde(rename = "saturationRatio")]
     saturation_ratio: f64,
-    variations: Option<Vec<Variation>>
+    variations: Option<Vec<Variation>>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -31,10 +31,9 @@ pub struct Variation {
     display_name: String,
 }
 
-
 #[cfg(test)]
 mod test {
-    
+
     use super::*;
     use crate::MC_DATA_DIR;
 
@@ -46,7 +45,7 @@ mod test {
             path.push("foods.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _shapes: Foods = serde_json::from_str(&contents).unwrap();
             }

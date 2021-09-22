@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct Entities {
-    values: Vec<Entity>    
+    values: Vec<Entity>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -16,12 +16,12 @@ pub struct Entity {
     display_name: String,
     width: Option<f64>,
     height: Option<f64>,
-    r#type: String
+    r#type: String,
 }
 
 #[cfg(test)]
 mod test {
-    
+
     use super::*;
     use crate::MC_DATA_DIR;
 
@@ -33,7 +33,7 @@ mod test {
             path.push("entities.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _shapes: Entities = serde_json::from_str(&contents).unwrap();
             }

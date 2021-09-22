@@ -1,10 +1,10 @@
 use serde::{Deserialize, Serialize};
-use std::{collections::HashMap};
+use std::collections::HashMap;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct Blocks {
-    blocks: Vec<Block>
+    blocks: Vec<Block>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -21,7 +21,7 @@ pub struct Block {
     bounding_box: BoundingBox,
     material: Option<String>,
     #[serde(rename = "harvestTools")]
-    harvest_tools : Option<HashMap<usize, bool>>,
+    harvest_tools: Option<HashMap<usize, bool>>,
     variations: Option<Vec<Variation>>,
     states: Option<Vec<State>>,
     drops: Drops,
@@ -44,7 +44,7 @@ pub enum BoundingBox {
     #[serde(rename = "block")]
     Block,
     #[serde(rename = "empty")]
-    Empty
+    Empty,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -52,22 +52,19 @@ pub enum BoundingBox {
 pub enum Drops {
     New(Vec<u64>),
     /// Used in older versions of minecraft.
-    Old(Vec<Drop>)
+    Old(Vec<Drop>),
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Drop {
-    drop: DropInfo
+    drop: DropInfo,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DropInfo {
     Single(u64),
-    Object {
-        id: u64,
-        metadata: u64,
-    }
+    Object { id: u64, metadata: u64 },
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -82,7 +79,7 @@ pub struct Variation {
     #[serde(rename = "displayName")]
     display_name: String,
     metadata: u64,
-    description: Option<String>
+    description: Option<String>,
 }
 
 #[cfg(test)]
@@ -98,7 +95,7 @@ mod test {
             path.push("blocks.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _blocks: Blocks = serde_json::from_str(&contents).unwrap();
             }

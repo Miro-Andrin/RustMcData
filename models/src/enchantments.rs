@@ -38,7 +38,6 @@ pub struct Enchantment {
     tradeable: bool,
     /// Can this enchantment be discovered.
     discoverable: bool,
-    
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -61,11 +60,10 @@ mod test {
             path.push("enchantments.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _enchantments: Enchantments = serde_json::from_str(&contents).unwrap();
             }
         }
     }
 }
-

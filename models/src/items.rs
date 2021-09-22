@@ -3,12 +3,12 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct Items {
-    items: Vec<Item>
+    items: Vec<Item>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Item {
-    id : u64,
+    id: u64,
     #[serde(rename = "displayName")]
     display_name: String,
     #[serde(rename = "stackSize")]
@@ -20,7 +20,7 @@ pub struct Item {
     #[serde(rename = "maxDurability")]
     max_durability: Option<u64>,
     name: String,
-    variations: Option<Vec<Variation>>
+    variations: Option<Vec<Variation>>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -30,11 +30,9 @@ pub struct Variation {
     display_name: String,
 }
 
-
-
 #[cfg(test)]
 mod test {
-    
+
     use super::*;
     use crate::MC_DATA_DIR;
 
@@ -46,7 +44,7 @@ mod test {
             path.push("foods.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _shapes: Items = serde_json::from_str(&contents).unwrap();
             }

@@ -3,18 +3,18 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct BlockLoot {
-    items: Vec<BlockLootEntry>
+    items: Vec<BlockLootEntry>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct BlockLootEntry {
     block: String,
-    drops: Vec<DropItem>
+    drops: Vec<DropItem>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct DropItem {
-    item : String,
+    item: String,
     #[serde(rename = "dropChance")]
     drop_chance: f64,
     #[serde(rename = "stackSizeRange")]
@@ -26,8 +26,6 @@ pub struct DropItem {
     #[serde(rename = "noSilkTouch")]
     no_silk_touch: Option<bool>,
 }
-
-
 
 #[cfg(test)]
 mod test {
@@ -42,7 +40,7 @@ mod test {
             path.push("blockLoot.json");
 
             if path.exists() {
-                println!("{}",path.display());
+                println!("{}", path.display());
                 let contents = std::fs::read_to_string(path).unwrap();
                 let _shapes: BlockLoot = serde_json::from_str(&contents).unwrap();
             }
