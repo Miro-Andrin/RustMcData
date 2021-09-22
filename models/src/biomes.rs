@@ -1,21 +1,30 @@
+use std::path::Path;
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(transparent)]
 pub struct Biomes {
-    biomes: Vec<Biome>,
+    pub biomes: Vec<Biome>,
+}
+
+impl Biomes {
+    pub fn from_file(path: impl AsRef<Path>) -> Result<Self, Box<dyn std::error::Error + 'static>> {
+        let contents = std::fs::read_to_string(path)?;
+        Ok(serde_json::from_str(&contents)?)
+    }
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Biome {
     /// The unique identifies for a biome
-    id: u64,
+    pub id: u64,
     /// The name of a biome
-    name: String,
+    pub name: String,
     /// The category of a biome
     category: String,
     /// The temperature of a biome between -1 and 2
-    temperature: f64,
+    pub temperature: f64,
     /// The type of precipitation: none, rain or snow
     precipitation: Precipitation,
     /// The depth of a biome
@@ -24,11 +33,11 @@ pub struct Biome {
     dimension: Dimension,
     /// The display name of a biome
     #[serde(rename = "displayName")]
-    display_name: String,
+    pub display_name: String,
     /// The color in a biome
     color: u64,
     /// How much rain there is in a biome, between 0 and 1.
-    rainfall: f64,
+    pub rainfall: f64,
 }
 
 #[derive(Debug, Deserialize, Serialize)]

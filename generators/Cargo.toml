@@ -7,3 +7,4 @@ edition = "2018"
 
 [dependencies]
 quote = "1.0"
+models = { path = "../models"}
